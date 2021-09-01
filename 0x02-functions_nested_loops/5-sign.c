@@ -1,8 +1,9 @@
 #include "main.h"
+
 /**
- * print_sign - returns 1 if n is +, - if n < 0 0 otherwise
+ * print_sign - prints the sign
  * @n: integer to be tested
- * Return: 1, -1 or 0
+ * Return:Always 0
  */
 int print_sign(int n)
 {

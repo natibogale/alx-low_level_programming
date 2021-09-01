@@ -1,12 +1,14 @@
+#include "main.h"
 #include <stdio.h>
 
 /**
- * print_to_98 - prints every number from n to 98
- * @n: starting number
+ * print_to_98 - prints all natural nums from n to 98
+ *
+ * @n: integer to be tested
+ * Return: List of numbers
  */
 void print_to_98(int n)
 {
-
 	int i;
 
 	if (n <= 98)
@@ -15,7 +17,8 @@ void print_to_98(int n)
 		{
 			printf("%i, ", i);
 		}
-	} else
+	}
+	else
 	{
 		for (i = n; i > 98; i--)
 		{
@@ -24,3 +27,4 @@ void print_to_98(int n)
 	}
 	printf("98\n");
 }
+

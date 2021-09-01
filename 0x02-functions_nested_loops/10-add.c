@@ -1,11 +1,13 @@
 #include "main.h"
+
 /**
-*add-adds to numbers i and j
-*@i:number 1
-*@j:bumber 2
-*Return: returns i + j
-*/
-int add(int i, int j)
+ * add - add two integer
+ * @num1: integer1
+ * @num2: integer2
+ * Return: sum
+ */
+int add(int num1, int num2)
 {
-	return (i + j);
+	return (num1 + num2);
 }
+

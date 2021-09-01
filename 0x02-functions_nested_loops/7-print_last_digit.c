@@ -1,25 +1,28 @@
 #include "main.h"
 
 /**
- * print_last_digit - prints the lest digit
- * @n: first parameter
- *
- * Description: prints the last digit
- * Return: Always (0).
+ * _abs - print last digit
+ * @n: integer
+ * Return: 0
+ */
+int _abs(int n)
+{
+	if (n >= 0)
+		return (n);
+	else
+		return (-1 * n);
+}
+/**
+ * print_last_digit - print last digit
+ * @n: integer
+ * Return: 0
  */
 
 int print_last_digit(int n)
 {
-	int last_digit;
+	int lastD;
 
-	last_digit = n % 10;
-
-	if (last_digit < 0)
-	{
-		last_digit *= -1;
-	}
-
-	_putchar(last_digit + '0');
-
-	return (last_digit);
+	lastD = _abs((n % 10));
+	_putchar(lastD + 48);
+	return (lastD);
 }
