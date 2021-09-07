@@ -1,4 +1,4 @@
-#include "main.h"
+#include "holberton.h"
 /**
  * puts2 - function that prints one char out of 2 of a string
  * @str: char
