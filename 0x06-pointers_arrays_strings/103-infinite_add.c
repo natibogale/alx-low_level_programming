@@ -1,46 +1,105 @@
+
 #include "main.h"
+
 /**
-  * infinite_add - adds two numbers
-  * @n1: number1
-  * @n2: number2
-  * @r: result
-  * @size_r: size result
-  * Return: r addition
-**/
+ * _strlen - returns the length of a string
+ * @s: string s
+ * Return: length of string
+ */
+int _strlen(char *s)
+{
+	char *p = s;
+
+	while (*s)
+		s++;
+	return (s - p);
+}
+
+/**
+ * rev_string - reverses a string
+ * @s: string s
+ */
+void rev_string(char *s)
+{
+	int i = 0;
+	int size = _strlen(s);
+	char temp;
+
+	while (i < size)
+	{
+		temp = *(s + i);
+		*(s + i) = *(s + size - 1);
+		*(s + size - 1) = temp;
+		i++;
+		size--;
+	}
+}
+
+/**
+ * returnRes - changes pretotal to digit to be added
+ * @sum: pre-total
+ * @plusOne: flag to add one to res
+ * Return: returns digit to be placed into array
+ */
+int returnRes(int sum, int plusOne)
+{
+	int res;
+
+	if (sum == 9 && plusOne)
+		res = 0;
+	else if ((sum >= 10 && plusOne) || (sum < 9 && plusOne))
+		res = (sum % 10) + 1;
+	else
+		res = sum % 10;
+	return (res);
+}
+
+/**
+ * returnPlusOne - determines bool of plusOne
+ * @sum: pre-total
+ * @plusOne: flag to add one to res
+ * Return: 1 if true, 0 if false
+ */
+int returnPlusOne(int sum, int plusOne)
+{
+	if (sum > 9)
+		plusOne = 1;
+	else if (sum == 9 && plusOne)
+		plusOne = 1;
+	else
+		plusOne = 0;
+	return (plusOne);
+}
+
+/**
+ * infinite_add - function that adds two numbers
+ * @n1: first number
+ * @n2: second number
+ * @r: buffer that the function will use to store the result
+ * @size_r: size of buffer
+ * Return: pointer to result
+ */
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-	int i = 0, j = 0, a, b, c, n, aux, dec = 0;
+	int sum, res, first, second, i = 0, plusOne = 0;
+	int len1 = _strlen(n1), len2 = _strlen(n2);
+	char *ptr = r;
 
-	while (n1[i] != '\0')
+	while (len1 > 0 || len2 > 0)
 	{
-	i++;
+		first = len1 > 0 ? (*(n1 + len1 - 1) - '0') : 0;
+		second = len2 > 0 ? (*(n2 + len2 - 1) - '0') : 0;
+		sum = first + second;
+		res = returnRes(sum, plusOne);
+		plusOne = returnPlusOne(sum, plusOne);
+		*(ptr + i) = res + '0';
+		len1--;
+		len2--;
+		i++;
 	}
-	while (n2[j] != '\0')
-	{
-	j++;
-	}
-	for (n = 0; n < j || n < i; n++)
-	{
-	a = (i - n) > 0 ? (n1[i - n - 1] - '0') : 0;
-	b = (j - n) > 0 ? (n2[j - n - 1] - '0') : 0;
-	c = a + b + dec;
-	r[n] = (c % 10) + '0';
-	dec = c > 9 ? 1 : 0;
-	}
-	if (dec == 1)
-	{ r[n] = '1';
-	r[n + 1] = '\0'; }
-	else
-	{ r[n] = '\0';
-	n--; }
-	for (i = 0; i < n + 1; i++)
-	{
-	for (j = 0; j < (n - i); j++)
-	{
-	aux = r[j + 1];
-	r[j + 1] = r[j];
-	r[j] = aux;
-	}
-	}
-return (n < size_r - 1 ? r : 0);
+	if (plusOne)
+		*(ptr + i) = 1 + '0';
+	ptr[++i] = '\0';
+	rev_string(ptr);
+	return ((size_r > _strlen(ptr)) ? ptr : 0);
 }
